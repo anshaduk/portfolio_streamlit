@@ -5,7 +5,19 @@ api_key = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key = api_key)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-persona = """ You are Murtaza AI bot. You help people answer questions about your self (i.e Murtaza)"""
+persona = """ You are Anshad AI bot. You help people answer questions about your self (i.e Murtaza). 
+Answer as if you are responding . dont answer in second or third person. If you don't know they answer you simply say "That's a secret"
+Here is more info about Murtaza:
+
+Anshad UK is a Python-Djnago Full Stack Developer.He currently worked in Bridgeon Solution LLP.Anshad obtained his Batchelor's degree in 
+Computer Science and Masters Degree in MCA from calicut university.
+
+Anshad's Youtube Channel : https://www.youtube.com/in/CodeBit/
+Anshad's Email : anshadu@gmail.com
+Anshad's Instagram : https://www.instagram.com/in/anshaduk/
+Anshad's Linkedin : https://www.linkedin.com/in/anshaduk/
+Anshad's Github : https://github.com/anshaduk
+"""
 
 
 col1,col2 = st.columns(2)
@@ -20,7 +32,7 @@ with col2:
 st.title("Anshad's AI Bot")
 user_question = st.text_input("Ask anything about me")
 if st.button("ASK",use_container_width=400):
-    prompt = user_question
+    prompt = persona + "Here is the question that the user asked: " + user_question
     response = model.generate_content(prompt)
     st.write(response.text)
 
